@@ -1,27 +1,27 @@
-GET http://localhost:3000/tests
+GET http://localhost:3000/locations
 
 ###
 
-GET http://localhost:3000/tests/5e371b45568cf24260d66ada
+GET http://localhost:3000/locations/5e371b45568cf24260d66ada
 
 ###
 
-POST http://localhost:3000/tests
+POST http://localhost:3000/locations
 Content-Type: application/json
 
 {
-    "title": "goose",
+    "title": "stuff",
     "latitude": 44,
     "longitude": 66
 }
 
 ###
 
-DELETE http://localhost:3000/tests/5e3738acb4d2230a1db0d3ce
+DELETE http://localhost:3000/locations/5e38a83614ed010dbcd50c12
 
 ###
 
-PATCH http://localhost:3000/tests/5e37313e5e309c07ad57bc60
+PATCH http://localhost:3000/locations/5e37313e5e309c07ad57bc60
 Content-Type: application/json
 
 {

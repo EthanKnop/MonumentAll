@@ -1,12 +1,25 @@
 const express = require('express')
 const router = express.Router()
-const Tester = require('../models/test')
+const entrySchema = require('../models/schema')
+const multer = require('multer')
+
+const upload = multer({
+    dest: 'uploads/'
+})
 
 // Get all entries
 router.get('/', async (req, res) => {
     try {
-        const tests = await Tester.find()
-        res.json(tests)
+        const allLocations = await entrySchema.find()
+        res.json(allLocations)
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+})
+
+router.get('/upload', async(req, res) => {
+    try {
+        res.sendFile(__dirname + '/index.html')
     } catch (error) {
         res.status(500).json({message: error.message})
     }
@@ -14,15 +27,18 @@ router.get('/', async (req, res) => {
 
 // Create one entry
 router.post('/', async (req, res) => {
-    const entry = new Tester({
+    console.log(req.file)
+    const entry = new entrySchema({
         title: req.body.title,
         latitude: req.body.latitude,
-        longitude: req.body.longitude
+        longitude: req.body.longitude,
+        comments: [],
+        img: req.body.img,
     })
 
     try {
-        const newTester = await entry.save()
-        res.status(201).json(newTester)
+        const newLocation = await entry.save()
+        res.status(201).json(newLocation)
     } catch (error) {
         res.status(400).json({message: error.message})
     }
@@ -67,7 +83,7 @@ router.delete('/:id', getEntry, async (req, res) => {
 
 async function getEntry(req, res, next) {
     try {
-        entry = await Tester.findById(req.params.id)
+        entry = await entrySchema.findById(req.params.id)
         if (entry == null) {
             return res.status(404).json({message: 'Could not find entry'})
         }

@@ -11,7 +11,9 @@ db.on('error', (error) => console.error(error))
 db.once('open', () => console.log('connected to database'))
 
 app.use(express.json())
-const testRouter = require('./routes/routes')
-app.use('/tests', testRouter)
+const router = require('./routes/routes')
+app.use('/locations', router)
+const html = require('./routes/webpage')
+app.use('/', html)
 
 app.listen(port, () => console.log('server started'))
