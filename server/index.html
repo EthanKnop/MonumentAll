@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Simple Multer Upload Example</title>
+    <title>MonumentAll Test</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
@@ -16,6 +16,11 @@
       <p>Image</p>
       <input type="file" name="file-to-upload">
       <input type="submit" value="Upload">
+    </form>
+    <form action="/image" enctype="multipart/form-data" method="get">
+      <p>Retrieve image</p>
+      <input type="text" name="filename">
+      <input type="submit" value="Download">
     </form>
   </body>
 </html>

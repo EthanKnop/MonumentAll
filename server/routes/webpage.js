@@ -8,11 +8,24 @@ const upload = multer({
 })
 
 // Get webpage
-router.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, '../index.html'))
+router.get('/', async (req, res) => {
+    try {
+        res.sendFile(path.join(__dirname, '../index.html'))
+    } catch (error) {
+        res.status(400).json({message: error.message})
+    }
 })
 
-// Upload photo
+// Get image specified by name
+router.get('/image', async (req, res) => {
+    try {
+        res.sendFile(path.join(__dirname, '../uploads/', req.query.filename))
+    } catch (error) {
+        res.status(400).json({message: error.message})
+    }
+})
+
+// Upload form to database
 router.post('/', upload.single('file-to-upload'), async(req, res) => {
     const entry = new entrySchema({
         title: req.body.title,
@@ -27,7 +40,6 @@ router.post('/', upload.single('file-to-upload'), async(req, res) => {
     } catch (error) {
         res.status(400).json({message: error.message})
     }
-
 })
 
 module.exports = router
