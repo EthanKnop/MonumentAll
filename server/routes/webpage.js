@@ -7,11 +7,25 @@ const upload = multer({
     dest: path.join(__dirname, '../uploads')
 })
 
+const searchRange = 1
+
 // Get webpage
 router.get('/', async (req, res) => {
     try {
         res.sendFile(path.join(__dirname, '../index.html'))
     } catch (error) {
+        res.status(400).json({message: error.message})
+    }
+})
+
+router.get('/location', async (req, res) => {
+    try {
+        var latrange = {$lte: req.query.lat + searchRange, $gte: req.query.lat - searchRange}
+        var lonrange = {$lte: req.query.lon + searchRange, $gte: req.query.lat - searchRange}
+        const restest = await entrySchema.find({latitude: latrange, longitude: lonrange })
+        console.log(restest)
+        res.status(201).json(restest)
+    } catch {
         res.status(400).json({message: error.message})
     }
 })
