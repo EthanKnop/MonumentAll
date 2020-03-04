@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
+
     <form action="/" enctype="multipart/form-data" method="post">
       <p>Title</p>
       <input type="text" name="title">
@@ -17,10 +18,22 @@
       <input type="file" name="file-to-upload">
       <input type="submit" value="Upload">
     </form>
+
     <form action="/image" enctype="multipart/form-data" method="get">
       <p>Retrieve image</p>
       <input type="text" name="filename">
       <input type="submit" value="Download">
     </form>
+
+
+    <form action="/location" enctype="multipart/form-data" method="get">
+      <p>Retrieve location</p>
+      <p>Latitude</p>
+      <input type="number" name="lat">
+      <p>Longitude</p>
+      <input type="number" name="lon">
+      <input type="submit" value="Retrieve">
+    </form>
+
   </body>
 </html>
