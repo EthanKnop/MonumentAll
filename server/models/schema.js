@@ -5,6 +5,8 @@ const locationSchema = new mongoose.Schema({
     longitude: Number,
     comments: Array,
     img: String,
+    
+
 })
 
 module.exports = mongoose.model('Locations', locationSchema)
